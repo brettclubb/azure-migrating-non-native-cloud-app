@@ -63,9 +63,10 @@ Complete a month cost analysis of each Azure resource to give an estimate total 
 
 | Azure Resource | Service Tier | Monthly Cost |
 | ------------ | ------------ | ------------ |
-| *Azure Postgres Database* |     |              |
-| *Azure Service Bus*   |         |              |
-| ...                   |         |              |
+| *Azure Postgres Database* | Basic    |    $56          |
+| *Azure Service Bus*   |    Basic     |     $0.05         |
+| *Azure App Service*                 |  F1 - Linux    |      Free        |
 
 ## Architecture Explanation
-This is a placeholder section where you can provide an explanation and reasoning for your architecture selection for both the Azure Web App and Azure Function.
+
+The move to Azure Web App allows us to deploy the existing application mostly as-is with some configuration changes. More importantly, it gives our app the ability to autoscale and load balance dynamically as user load shifts. To help with notification timeouts, Azure Functions are triggered via ServiceBus to offload sending personalized messages to all of the attendees as a background process. This keeps the web app responsive and avoids timeout issues. These architectural changes allow the TechConf team to operate more efficiently and at low overall cost.
